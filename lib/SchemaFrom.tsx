@@ -19,7 +19,6 @@ export default defineComponent({
   },
   setup(props, { slots, emit, attrs }) {
     provide(SchemaFormContextKey, { SchemaItem })
-    console.log(SchemaFormContextKey)
     return () => {
       const { schema, value } = props
       const handleChange = (v: any) => {

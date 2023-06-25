@@ -20,7 +20,6 @@ export default defineComponent({
       const retrievedSchema = retrieveSchemaRef.value
       //TODO:如果type 没写,可以猜测type类型
       const type = schema.type
-      console.log(type)
       let Component: any
       switch (type) {
         case SchemaTypes.STRING: {
@@ -39,8 +38,6 @@ export default defineComponent({
           console.warn(`${type}is not supported`)
         }
       }
-
-      console.log(retrievedSchema)
 
       return <Component {...props} schema={retrievedSchema} />
     }
