@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { PropType, defineComponent } from 'vue'
 export enum SchemaTypes {
   'NUMBER' = 'number',
   'INTEGER' = 'integer',
@@ -63,3 +63,11 @@ export const FiledPropsDefine = {
     required: true,
   },
 } as const
+
+// 解决inject 组件类型检测失效的问题。
+export const TypeHelperComponent = defineComponent({
+  props: FiledPropsDefine,
+})
+
+//定义ts类型
+export type CommonFieldType = typeof TypeHelperComponent

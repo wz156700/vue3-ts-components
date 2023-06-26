@@ -1,30 +1,15 @@
 import { defineComponent, PropType, inject } from 'vue'
-import { SchemaFormContextKey } from '../context'
+import { useVJSFContext } from '../context'
 import { FiledPropsDefine } from '../type'
 import { isObject } from '../utils'
-
-// 解决inject 组件类型检测失效的问题。
-const TypeHelperComponent = defineComponent({
-  props: FiledPropsDefine,
-})
-
-//定义ts类型
-type defineSchemaComponetType = typeof TypeHelperComponent
 
 export default defineComponent({
   name: 'objectField',
   props: FiledPropsDefine,
-  setup(props, { slots, attrs }) {
-    const context: { SchemaItem: defineSchemaComponetType } | undefined =
-      inject(SchemaFormContextKey)
-
-    if (!context) {
-      throw new Error('SchemaForm should be used')
-    }
-
+  setup(props) {
     return () => {
       const { schema, rootSchema, value } = props
-
+      const context = useVJSFContext()
       const { SchemaItem } = context
       const currentValue: any = isObject(value) ? value : {}
       const properties = schema.properties || {}
