@@ -2,6 +2,7 @@ import { defineComponent, PropType } from 'vue'
 import { FiledPropsDefine, Schema } from '../type'
 import { useVJSFContext } from '../context'
 import { createUseStyles } from 'vue-jss'
+import SelectionWidget from '../widgets/Selections'
 
 //增加添加，删除，上移，下移功能
 const useStyles = createUseStyles({
@@ -99,7 +100,7 @@ const ArrayItemWrapper = defineComponent({
 export default defineComponent({
   name: 'ArrayField',
   props: FiledPropsDefine,
-  setup(props, ctx) {
+  setup(props) {
     const handleArrayFieldChange = (v: any, index: number) => {
       const value: any = Array.isArray(props.value) ? props.value : []
       value[index] = v
@@ -190,8 +191,20 @@ export default defineComponent({
             </ArrayItemWrapper>
           )
         })
+      } else {
+        const enumOptions = (schema as any).items.enum
+        const options = enumOptions.map((e: any) => ({
+          key: e,
+          value: e,
+        }))
+        return (
+          <SelectionWidget
+            onChange={props.onChange}
+            value={props.value}
+            options={options}
+          />
+        )
       }
-      return null
     }
   },
 })
