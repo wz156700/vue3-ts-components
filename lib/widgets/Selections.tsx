@@ -23,9 +23,7 @@ export default defineComponent({
     //eslint-disable-next-line
     let currentValueRef = ref(props.value)
     watch(currentValueRef, (newV, oldV) => {
-      console.log(newV)
       if (newV !== props.value) {
-        console.log(newV)
         props.onChange(newV)
       }
     })
