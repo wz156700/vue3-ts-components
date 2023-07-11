@@ -14,7 +14,7 @@ describe('HelloWorld.vue', () => {
         },
       },
     })
-    const numberField = wrapper.findComponent({ name: 'numberField' })
+    const numberField = wrapper.findComponent(NumberField)
     expect(numberField.exists()).toBeTruthy()
     const input = numberField.find('input')
     input.element.value = '123'
