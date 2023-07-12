@@ -1,5 +1,5 @@
 import { defineComponent, PropType, provide } from 'vue'
-import { Schema, SchemaTypes } from './type'
+import { Schema, Theme } from './type'
 import SchemaItem from './schemaItem'
 import { SchemaFormContextKey } from './context'
 export default defineComponent({
@@ -16,9 +16,13 @@ export default defineComponent({
       type: Function as PropType<(v: any) => void>,
       required: true,
     },
+    theme: {
+      type: Object as PropType<Theme>,
+      required: true,
+    },
   },
   setup(props, { slots, emit, attrs }) {
-    provide(SchemaFormContextKey, { SchemaItem })
+    provide(SchemaFormContextKey, { SchemaItem, theme: props.theme })
     return () => {
       const { schema, value } = props
       const handleChange = (v: any) => {
