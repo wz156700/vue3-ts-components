@@ -1,24 +1,8 @@
 import { defineComponent, PropType, ref, watch } from 'vue'
+import { SelectionWidgetPropsDefine } from '../type'
 export default defineComponent({
   name: 'selectionWidget',
-  props: {
-    value: {
-      required: true,
-    },
-    onChange: {
-      type: Function as PropType<(v: any) => void>,
-      required: true,
-    },
-    options: {
-      type: Array as PropType<
-        {
-          key: string
-          value: any
-        }[]
-      >,
-      required: true,
-    },
-  },
+  props: SelectionWidgetPropsDefine,
   setup(props, ctx) {
     //eslint-disable-next-line
     let currentValueRef = ref(props.value)

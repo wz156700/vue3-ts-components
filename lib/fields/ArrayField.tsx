@@ -1,6 +1,7 @@
 import { defineComponent, PropType } from 'vue'
 import { FiledPropsDefine, Schema } from '../type'
 import { useVJSFContext } from '../context'
+import { getWidget } from '../theme'
 import { createUseStyles } from 'vue-jss'
 
 //增加添加，删除，上移，下移功能
@@ -145,11 +146,13 @@ export default defineComponent({
 
       props.onChange(arr)
     }
+
+    const SelectionWidgetRef = getWidget('SelectionWidget')
     return () => {
       const { schema, rootSchema, value } = props
       const context = useVJSFContext()
       const SchemaItem = context.SchemaItem
-      const SelectionWidget = context.theme.widgets.SelectionWidget
+      const SelectionWidget = SelectionWidgetRef.value
       // 判断schema.items是否是数组形式
       const isArrayType = Array.isArray(schema.items)
       // 判断schema.items 是否是单type形式

@@ -72,7 +72,7 @@ export const TypeHelperComponent = defineComponent({
 //定义ts类型
 export type CommonFieldType = typeof TypeHelperComponent
 
-const CommonWidgetPropsDefine = {
+export const CommonWidgetPropsDefine = {
   value: {},
   onChange: {
     type: Function as PropType<(v: any) => void>,
@@ -80,7 +80,7 @@ const CommonWidgetPropsDefine = {
   },
 } as const
 
-const SelectionWidgetPropsDefine = {
+export const SelectionWidgetPropsDefine = {
   ...CommonWidgetPropsDefine,
   options: {
     type: Array as PropType<
@@ -91,16 +91,33 @@ const SelectionWidgetPropsDefine = {
     >,
     required: true,
   },
+} as const
+
+//解决组件类型检测失效的问题
+export const TypeCommonWidgetDefine = defineComponent({
+  props: CommonWidgetPropsDefine,
+})
+export type CommonWidgetDefine = typeof TypeCommonWidgetDefine
+
+export const TypeSelectionWidgetDefine = defineComponent({
+  props: SelectionWidgetPropsDefine,
+})
+export type SelectionWidgetDefine = typeof TypeSelectionWidgetDefine
+
+//枚举widget的name
+export enum SelectionWidgetNames {
+  SelectionWidget = 'SelectionWidget',
 }
 
-type CommonWidgetDefine = DefineComponent<typeof CommonWidgetPropsDefine>
-
-type SelectionWidgetDefine = DefineComponent<typeof SelectionWidgetPropsDefine>
+export enum CommonWidgetNames {
+  TextWidget = 'TextWidget',
+  NumberWidget = 'NumberWidget',
+}
 
 export interface Theme {
   widgets: {
-    SelectionWidget: SelectionWidgetDefine
-    TextWidget: CommonWidgetDefine
-    NumberWidget: CommonFieldType
+    [SelectionWidgetNames.SelectionWidget]: SelectionWidgetDefine
+    [CommonWidgetNames.TextWidget]: CommonWidgetDefine
+    [CommonWidgetNames.NumberWidget]: CommonWidgetDefine
   }
 }
