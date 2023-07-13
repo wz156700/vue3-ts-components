@@ -4,6 +4,8 @@ import { useVJSFContext } from '../context'
 import { getWidget } from '../theme'
 import { createUseStyles } from 'vue-jss'
 
+import { SelectionWidgetNames, CommonWidgetNames } from '../type'
+
 //增加添加，删除，上移，下移功能
 const useStyles = createUseStyles({
   container: {
@@ -147,7 +149,7 @@ export default defineComponent({
       props.onChange(arr)
     }
 
-    const SelectionWidgetRef = getWidget('SelectionWidget')
+    const SelectionWidgetRef = getWidget(SelectionWidgetNames.SelectionWidget)
     return () => {
       const { schema, rootSchema, value } = props
       const context = useVJSFContext()
